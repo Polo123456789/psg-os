@@ -6,9 +6,9 @@
 #error "Tienes que utilizar un cross compiler"
 #endif
 
-#if !defined(__i386__)
-#error "Tiene que ser un compilador para 32 bits"
-#endif
+//#if !defined(__i386__)
+//#error "Tiene que ser un compilador para 32 bits"
+//#endif
 
 // Porque no tenemos la libreria estandar
 size_t strlen(const char* str) 
