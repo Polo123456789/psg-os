@@ -39,7 +39,7 @@ $(KERNEL_OBJ): %.o: %.cpp $(KERNEL_HEADERS)
 
 psg-os.bin: boot.o $(FREE_STANING_LIB_OBJ) $(KERNEL_ARCH_OBJ) $(KERNEL_OBJ)
 	@echo (Linker) Enlazando todo ...
-	@$(CC_CXX) bin/boot.o $(FREE_STANING_LIB_OBJ) $(KERNEL_ARCH_OBJ) \
+	$(CC_C) bin/boot.o $(FREE_STANING_LIB_OBJ) $(KERNEL_ARCH_OBJ) \
 	    $(KERNEL_OBJ) $(CC_C_FLAGS)
 
 .PHONY: clean

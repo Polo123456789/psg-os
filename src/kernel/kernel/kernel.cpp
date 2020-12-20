@@ -12,7 +12,6 @@
 extern "C" {
 
 void kernel_main(void) {
-    int e = strlen("Saludos");
     tty::init();
     tty::write_string("Hola mundo.");
 }
