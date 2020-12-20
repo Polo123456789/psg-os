@@ -56,7 +56,7 @@ LINK_LIST := $(CRTI_OBJ) $(CRTBEGIN_OBJ) bin/boot.o $(INTERNAL_OBJ) $(CRTEND_OBJ
 
 psg-os.bin: boot.o crti.o crtn.o $(LINK_LIST)
 	@echo (Linker) Enlazando todo ...
-	$(CC_C) $(LINK_LIST) $(CC_C_FLAGS)
+	@$(CC_C) $(LINK_LIST) $(CC_C_FLAGS)
 
 .PHONY: clean
 clean:

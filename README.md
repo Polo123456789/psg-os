@@ -9,7 +9,7 @@ General
 
 * [X] Hola mundo
 * [X] Organizacion
-* [ ] Build System
+* [X] Build System
 * [ ] Interrupts
 * [ ] Shell
 * [ ] Pagin
