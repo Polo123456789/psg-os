@@ -1,0 +1,5 @@
+Checks:
+'-*,bugprone-*,cppcoreguidelines-*,google-*,misc-*,modernize-*,performance-*,readability-*,-modernize-use-trailing-return-type,
+-modernize-redundant-void-arg, -readability-implicit-bool-conversion,
+-bugprone-exception-escape, -cppcoreguidelines-pro-bounds-pointer-arithmetic'
+FormatStyle: 'file'

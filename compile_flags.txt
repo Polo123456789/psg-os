@@ -1,0 +1,7 @@
+-ffreestanding
+-Wall
+-Wextra
+-fno-exceptions
+-fno-rtti
+-Isrc/lib
+-Isrc/kernel/include
