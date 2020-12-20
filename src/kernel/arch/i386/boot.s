@@ -75,6 +75,7 @@ _start:
 	C++ features such as global constructors and exceptions will require
 	runtime support to work as well.
 	*/
+        call _init
  
 	/*
 	Enter the high-level kernel. The ABI requires the stack is 16-byte
@@ -98,6 +99,8 @@ _start:
 	3) Jump to the hlt instruction if it ever wakes up due to a
 	   non-maskable interrupt occurring or due to system management mode.
 	*/
+
+        call _fini
 	cli
 1:	hlt
 	jmp 1b

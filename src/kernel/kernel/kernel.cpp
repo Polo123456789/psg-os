@@ -2,9 +2,9 @@
     #error "Tienes que utilizar un cross compiler"
 #endif
 
-#if !defined(__i386__)
-#error "Tiene que ser un compilador para 32 bits"
-#endif
+//#if !defined(__i386__)
+//#error "Tiene que ser un compilador para 32 bits"
+//#endif
 
 #include <kernel/tty.hpp>
 #include <cstring.hpp>

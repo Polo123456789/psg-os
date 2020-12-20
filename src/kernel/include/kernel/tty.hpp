@@ -4,10 +4,12 @@
 #include <stddef.h>
 
 namespace tty {
-    void init();
-    void put_char(char c);
-    void write(const char* data, size_t size);
-    void write_string(const char* data);
-}
+
+void init();
+void put_char(char c);
+void write(const char *data, size_t size);
+void write_string(const char *data);
+
+} // namespace tty
 
 #endif

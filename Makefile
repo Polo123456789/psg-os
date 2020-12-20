@@ -6,6 +6,14 @@ boot.o: src/kernel/arch/i386/boot.s
 	@echo (boot) Creando objeto: boot.o
 	@i686-elf-as src/kernel/arch/i386/boot.s -o bin/boot.o
 
+crti.o: src/kernel/arch/i386/crti.s
+	@echo (crti) Creando objeto: crti.o
+	@i686-elf-as src/kernel/arch/i386/crti.s -o bin/crti.o
+
+crtn.o: src/kernel/arch/i386/crtn.s
+	@echo (crtn) Creando objeto: crtn.o
+	@i686-elf-as src/kernel/arch/i386/crtn.s -o bin/crtn.o
+
 INCLUDE_FLAGS := -Isrc/lib -Isrc/kernel/include
 CC_CXX := i686-elf-g++
 CC_CXX_FLAGS := -ffreestanding -O2 -Wall -Wextra -fno-exceptions -fno-rtti
@@ -37,15 +45,21 @@ $(KERNEL_OBJ): %.o: %.cpp $(KERNEL_HEADERS)
 	@echo (kernel) Creando objeto: $@
 	@$(CC_CXX) -c $< $(CC_CXX_FLAGS) $(INCLUDE_FLAGS) -o $@
 
-psg-os.bin: boot.o $(FREE_STANING_LIB_OBJ) $(KERNEL_ARCH_OBJ) $(KERNEL_OBJ)
+INTERNAL_OBJ := $(FREE_STANING_LIB_OBJ) $(KERNEL_ARCH_OBJ) $(KERNEL_OBJ)
+
+CRTI_OBJ=bin/crti.o
+CRTBEGIN_OBJ:=$(shell $(CC_C) $(CC_C_FLAGS) -print-file-name=crtbegin.o)
+CRTEND_OBJ:=$(shell $(CC_C) $(CC_C_FLAGS) -print-file-name=crtend.o)
+CRTN_OBJ=bin/crtn.o
+
+LINK_LIST := $(CRTI_OBJ) $(CRTBEGIN_OBJ) bin/boot.o $(INTERNAL_OBJ) $(CRTEND_OBJ) $(CRTN_OBJ)
+
+psg-os.bin: boot.o crti.o crtn.o $(LINK_LIST)
 	@echo (Linker) Enlazando todo ...
-	$(CC_C) bin/boot.o $(FREE_STANING_LIB_OBJ) $(KERNEL_ARCH_OBJ) \
-	    $(KERNEL_OBJ) $(CC_C_FLAGS)
+	$(CC_C) $(LINK_LIST) $(CC_C_FLAGS)
 
 .PHONY: clean
 clean:
-	-del $(subst /,\, $(FREE_STANING_LIB_CSTR_OBJ))
-	-del $(subst /,\, $(KERNEL_ARCH_OBJ))
-	-del $(subst /,\, $(KERNEL_OBJ))
+	-del $(subst /,\, $(INTERNAL_OBJ))
 	-del bin\boot.o
 	-del bin\psg-os.bin
